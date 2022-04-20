@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindbugsPlugin 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="findbugsplugin.xsd"
+    pluginid="com.mclowry.spot-rando-bugs"
+>
+
+        <Detector class="com.mclowry.spotrandobugs.SpringDataJpaRepoDetector" reports="SPRING_DATA_JPA_GET" />
+
+        <BugCategory category="PROBLEMATIC"/>
+
+        <BugPattern abbrev="SDJ" type="SPRING_DATA_JPA_GET" category="PROBLEMATIC" />
+        
+</FindbugsPlugin>

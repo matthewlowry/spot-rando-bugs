@@ -1,0 +1,2 @@
+-2 BugPattern SPRING_DATA_JPA_GET
++14 Category PROBLEMATIC
