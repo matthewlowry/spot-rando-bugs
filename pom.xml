@@ -4,7 +4,7 @@
 
     <groupId>com.mclowry</groupId>
     <artifactId>spot-rando-bugs</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <description>Spot Rando Bugs</description>
     
@@ -17,12 +17,14 @@
     </properties>
 
     <dependencies>
+    
         <dependency>
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs</artifactId>
             <version>${spotBugsVersion}</version>
             <scope>provided</scope>
         </dependency>
+        
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -41,9 +43,11 @@
             <version>${springDataJpaVersion}</version>
             <scope>test</scope>
         </dependency>
+        
     </dependencies>
 
     <build>
+    
         <plugins>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -84,5 +88,7 @@
                 </dependencies>
             </plugin>
         </plugins>
+        
     </build>
+    
 </project>
