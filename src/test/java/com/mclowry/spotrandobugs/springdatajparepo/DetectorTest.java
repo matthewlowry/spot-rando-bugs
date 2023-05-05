@@ -1,4 +1,4 @@
-package com.mclowry.spotrandobugs;
+package com.mclowry.spotrandobugs.springdatajparepo;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,16 +12,21 @@ import edu.umd.cs.findbugs.test.matcher.BugInstanceMatcherBuilder;
 import static edu.umd.cs.findbugs.test.CountMatcher.containsExactly;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+import com.mclowry.spotrandobugs.SpringDataJpaRepoDetector;
 
-public class SpringDataJpaRepoDetectorTest {
+
+public class DetectorTest {
 
     @Rule
     public SpotBugsRule spotbugs = new SpotBugsRule();
     
+    /**
+     * Test that a class that should not trigger the detector, does, indeed, not trigger the detector.
+     */
     @Test
     public void testGoodCase() {
         spotbugs.addAuxClasspathEntry(Paths.get("target/test-classes"));
-        Path path = Paths.get("target/test-classes", "com/mclowry/spotrandobugs", "TrueNegative.class");
+        Path path = Paths.get("target/test-classes", "com/mclowry/spotrandobugs/springdatajparepo", "TrueNegative.class");
         assertThat(
             spotbugs.performAnalysis(path), 
             containsExactly(
@@ -29,14 +34,18 @@ public class SpringDataJpaRepoDetectorTest {
                 new BugInstanceMatcherBuilder().bugType(SpringDataJpaRepoDetector.BUG_TYPE).build()));
     }
 
+    /**
+     * Test that a class that should trigger the detector, does, indeed, trigger the detector.
+     */
     @Test
     public void testBadCase() {
         spotbugs.addAuxClasspathEntry(Paths.get("target/test-classes"));
-        Path path = Paths.get("target/test-classes", "com/mclowry/spotrandobugs", "TruePositive.class");
+        Path path = Paths.get("target/test-classes", "com/mclowry/spotrandobugs/springdatajparepo", "TruePositive.class");
         assertThat(
             spotbugs.performAnalysis(path), 
             containsExactly(
                 2, 
                 new BugInstanceMatcherBuilder().bugType(SpringDataJpaRepoDetector.BUG_TYPE).build()));
     }
+
 }

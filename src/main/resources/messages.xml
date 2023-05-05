@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MessageCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:noNamespaceSchemaLocation="messagecollection.xsd">
+<MessageCollection 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="messagecollection.xsd"
+>
 
     <Plugin>
         <ShortDescription>Spot Rando Bugs</ShortDescription>
@@ -10,6 +12,12 @@
     <Detector class="com.mclowry.spotrandobugs.SpringDataJpaRepoDetector">
         <Details>
             Detects problems or misues with Spring Data JPA Repository interfaces.
+        </Details>
+    </Detector>
+
+    <Detector class="com.mclowry.spotrandobugs.SpringFrameworkAopDetector">
+        <Details>
+            Detects problems or misues with Spring Framework AOP annotations.
         </Details>
     </Detector>
 
@@ -30,6 +38,24 @@ with the given ID exists, which leads to simpler, cleaner, and more explicit cod
         </Details>
     </BugPattern>
 
+    <BugPattern type="SPRING_FRAMEWORK_AOP_NONPUBLIC">
+        <ShortDescription>Use of AOP annotations on non-public methods.</ShortDescription>
+        <LongDescription>
+            AOP annotations (@Scheduled, @Transactional, etc) must only be applied to public instance methods. 
+        </LongDescription>
+        <Details>
+<![CDATA[
+<p>AOP annotations rely on generating proxies for the annotated class, injecting those
+proxies rather than the "naked" bean, and achieving the specified behavior via the proxy.
+Although it is technically feasible to intercept calls to non-public methods when proxies
+are being generated using CGLIB, Spring as a matter of design choice refuses to do so.
+Placing AOP annotations on non-public methods silently fails as it does not generate any 
+compile or run time errors or warnings.</p>
+]]>
+        </Details>
+    </BugPattern>
+
     <BugCode abbrev="SDJ">Spring Data JPA Bugs</BugCode>
+    <BugCode abbrev="SFA">Spring Framework AOP Bugs</BugCode>
     
 </MessageCollection>

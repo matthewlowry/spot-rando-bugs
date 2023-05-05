@@ -1,4 +1,4 @@
-package com.mclowry.spotrandobugs;
+package com.mclowry.spotrandobugs.springdatajparepo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
